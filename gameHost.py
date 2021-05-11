@@ -10,6 +10,7 @@ class Host:
             balls = ['B', 'R', 'Y', 'G', 'P', 'W']
         else:
             for i in range(pool): balls.append(string.ascii_uppercase[i])
+        print(balls)
         if duplicate:
             selected_balls = []
             for i in range(column):
