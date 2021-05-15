@@ -29,12 +29,14 @@ class Host:
     def guess(self, guess_balls):
         hit = 0
         blow = 0
+        temp_guess = list(guess_balls)
         for i in range(4):
             if self._hidden_box[i] == guess_balls[i]:
                 hit += 1
+                temp_guess.remove(self._hidden_box[i])
+            elif self._hidden_box[i] in temp_guess:
                 blow += 1
-            elif self._hidden_box[i] in guess_balls:
-                blow += 1
+                temp_guess.remove(self._hidden_box[i])
 
         if hit > 1:
             print(hit, "Hits, ", end='')
@@ -48,3 +50,15 @@ class Host:
             return True
         else:
             return False
+
+    def guess_for_AI(self, guess_balls):
+        hit = 0
+        blow = 0
+        for i in range(4):
+            if self._hidden_box[i] == guess_balls[i]:
+                hit += 1
+                blow += 1
+            elif self._hidden_box[i] in guess_balls:
+                blow += 1
+
+        return (hit, blow)
