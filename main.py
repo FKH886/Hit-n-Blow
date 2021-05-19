@@ -10,6 +10,9 @@ def main():
     except getopt.GetoptError:
         sys.exit(2)
     if opts:
+        duplicate = False
+        column = 4
+        pool = 6
         for opt, arg in opts:
             if opt in ['-d']:
                 duplicate = True
@@ -17,13 +20,11 @@ def main():
                 column = int(arg)
             elif opt in ['-p']:
                 pool = int(arg)
-            else:
-                duplicate = False
-                column = 4
-                pool = 6
         my_host = Host(duplicate=duplicate, column=column, pool=pool)
     else:
         my_host = Host()
+
+    my_host.show_hidden_box()
     while not my_host.guess_input():
         continue
 
