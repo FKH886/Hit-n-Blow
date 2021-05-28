@@ -1,7 +1,7 @@
 
 
 class simpleAI_1:
-    def __init__(self, gameHost, initial_guess='BRGY'):
+    def __init__(self, gameHost, initial_guess='BARGY'):
         print('Initial guess is: ', initial_guess)
         self.__host = gameHost
         self.__hits = []
@@ -21,18 +21,18 @@ class simpleAI_1:
         self.__record.append(input_guess)
 
     def next_input(self):
-        next = []
+
         return next
 
     def show_hits(self):
-        print(self.__hits)
+        print('hits: ', self.__hits)
 
     def show_blows(self):
-        print(self.__blows)
+        print('blows: ', self.__blows)
 
     def show_hb(self):
-        print(self.__hits)
-        print(self.__blows)
+        print('hits: ', self.__hits)
+        print('blows: ', self.__blows)
 
     def show_guess_count(self):
-        print(self.__guess_count)
+        print('count: ', self.__guess_count)
