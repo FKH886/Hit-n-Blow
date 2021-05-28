@@ -1,3 +1,5 @@
+import copy
+
 class five_guess_AI:
     def __init__(self, gameHost):
         self.__host = gameHost
@@ -24,20 +26,27 @@ class five_guess_AI:
         if hb[0] == self.__host.get_config()[1]:
             return True
         else:
-            self.__S.remove(input_guess)
             return False
 
+    def trim_for_AI(self, a, b):
+        hit = 0
+        blow = 0
+        temp_a = [char for char in a]
+        temp_b = [char for char in b]
+        for i in range(self.__host.get_config()[1]):
+            if a[i] == b[i]:
+                hit += 1
+                temp_a.remove(a[i])
+                temp_b.remove(a[i])
+        for i in range(len(temp_a)):
+            if temp_a[i] in temp_b:
+                blow += 1
+                temp_b.remove(temp_a[i])
+        return hit, blow
+
     def trim_S(self):
-        for s in self.__S:
-            hit = 0
-            blow = 0
-            for i in range(4):
-                if s[i] == self.__record[-1][i]:
-                    hit += 1
-                    blow += 1
-                elif s[i] in self.__record[-1]:
-                    blow += 1
-            if (self.__hits[-1], self.__blows[-1]) != (hit, blow):
+        for s in copy.deepcopy(self.__S):
+            if (self.__hits[-1], self.__blows[-1]) != self.trim_for_AI(s, self.__record[-1]):
                 self.__S.remove(s)
         print('S count: ', len(self.__S))
 
@@ -46,17 +55,17 @@ class five_guess_AI:
 
     def solve(self):
         self.guess_input('YYGG')
+        print('input: ', 'YYGG')
+        self.show_hb()
         self.show_guess_count()
         while True:
             next_input = self.next_input()
             print('input: ', next_input)
-            if self.guess_input(next_input):
-                self.show_hb()
-                self.show_guess_count()
+            solved = self.guess_input(next_input)
+            self.show_hb()
+            self.show_guess_count()
+            if solved:
                 break
-            else:
-                self.show_hb()
-                self.show_guess_count()
 
     def show_hits(self):
         print('hits: ', self.__hits)
@@ -70,3 +79,5 @@ class five_guess_AI:
 
     def show_guess_count(self):
         print('count: ', self.__guess_count)
+
+

@@ -1,5 +1,6 @@
 import random
 import string
+import copy
 
 
 class Host:
@@ -66,27 +67,17 @@ class Host:
     def guess_for_AI(self, guess_balls):
         hit = 0
         blow = 0
-        temp_b = self.__hidden_box
+        temp_a = [char for char in guess_balls]
+        temp_b = copy.deepcopy(self.__hidden_box)
         for i in range(self.__column):
             if guess_balls[i] == self.__hidden_box[i]:
                 hit += 1
+                temp_a.remove(guess_balls[i])
                 temp_b.remove(guess_balls[i])
-            elif guess_balls[i] in temp_b:
+        for i in range(len(temp_a)):
+            if temp_a[i] in temp_b:
                 blow += 1
-                temp_b.remove(guess_balls[i])
-        return hit, blow
-
-    def trim_for_AI(self, a, b):
-        hit = 0
-        blow = 0
-        temp_b = b
-        for i in range(self.__column):
-            if a[i] == b[i]:
-                hit += 1
-                temp_b.remove(a[i])
-            elif a[i] in temp_b:
-                blow += 1
-                temp_b.remove(a[i])
+                temp_b.remove(temp_a[i])
         return hit, blow
 
     def guess_for_AI_input(self, guess_balls):

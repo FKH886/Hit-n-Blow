@@ -6,3 +6,4 @@ if __name__ == '__main__':
     gameHost.show_hidden_box()
     gameAI = five_guess_AI(gameHost)
     gameAI.solve()
+    # print(gameAI.trim_for_AI('BBYG', 'YYGG'))

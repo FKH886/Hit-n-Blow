@@ -9,7 +9,7 @@ class simpleAI_1:
         self.__guess_count = 0
         self.__certain = []
         self.__record = []
-        for i in range(self.__host.__colum):
+        for i in range(self.__host.get_config()[1]):
             self.__certain.append(self.__host.__balls)
         self.guess_input(initial_guess)
 
