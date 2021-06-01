@@ -4,17 +4,19 @@ import copy
 
 
 class Host:
-    def __init__(self, duplicate=False, column=4, pool=6):
+    def __init__(self, duplicate=False, column=4, pool=6, print_log=False):
         self.__duplicate = duplicate
         self.__column = column
         self.__pool_num = pool
-        print('duplicate: ', duplicate, '  column: ', column, '  pool: ', pool)
+        if print_log:
+            print('duplicate: ', duplicate, '  column: ', column, '  pool: ', pool)
         self.__pool = []
         if pool == 6:
             self.__pool = ['B', 'R', 'Y', 'G', 'P', 'W']
         else:
             for i in range(pool): self.__pool.append(string.ascii_uppercase[i])
-        print(self.__pool)
+        if print_log:
+            print(self.__pool)
         if duplicate:
             selected_balls = []
             for i in range(column):
@@ -25,6 +27,9 @@ class Host:
 
     def show_hidden_box(self):
         print(self.__hidden_box)
+
+    def set_hidden_box(self, box):
+        self.__hidden_box = box
 
     def get_pool(self):
         return self.__pool
@@ -52,12 +57,14 @@ class Host:
         else:
             print(hit, "Hit, ", end='')
         if blow > 1:
-            print(blow, "Blows, ")
+            print(blow, "Blows")
         else:
-            print(blow, "Blow, ")
+            print(blow, "Blow", end='')
         if hit == 4:
+            print('!')
             return True
         else:
+            print('.')
             return False
 
     def guess_input(self):
