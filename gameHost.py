@@ -36,6 +36,9 @@ class Host:
         return self.__duplicate, self.__column, self.__pool_num
 
     def guess(self, guess_balls):
+        if len(guess_balls) != self.__column:
+            print('invalid input')
+            return False
         hit = 0
         blow = 0
         temp_guess = list(guess_balls)
