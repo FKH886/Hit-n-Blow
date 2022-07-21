@@ -42,10 +42,12 @@ class Host:
         hit = 0
         blow = 0
         temp_guess = list(guess_balls)
+
         for i in range(self.__column):
             if self.__hidden_box[i] == guess_balls[i]:
                 hit += 1
                 temp_guess.remove(self.__hidden_box[i])
+                # after removing the correct term, we won't calculate blow term twice
             elif self.__hidden_box[i] in temp_guess:
                 blow += 1
                 temp_guess.remove(self.__hidden_box[i])
