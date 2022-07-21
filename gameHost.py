@@ -62,6 +62,7 @@ class Host:
 
     def guess_input(self):
         guess_balls = input("enter your guess: ")
+        guess_balls = guess_balls.upper()
         return self.guess(guess_balls)
 
     def guess_for_AI(self, guess_balls):
