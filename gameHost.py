@@ -39,7 +39,7 @@ class Host:
         hit = 0
         blow = 0
         temp_guess = list(guess_balls)
-        for i in range(4):
+        for i in range(self.__column):
             if self.__hidden_box[i] == guess_balls[i]:
                 hit += 1
                 temp_guess.remove(self.__hidden_box[i])
@@ -55,7 +55,7 @@ class Host:
             print(blow, "Blows, ")
         else:
             print(blow, "Blow, ")
-        if hit == 4:
+        if hit == self.__column:
             return True
         else:
             return False
